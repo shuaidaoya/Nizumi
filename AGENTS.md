@@ -1,5 +1,52 @@
 # Project Rules for Kazumi
 
+## CI Workflow Rules（最重要）
+
+### 规则总则：CI workflow 文件与源代码同等重要
+
+CI workflow（`.github/workflows/release.yaml`）中存在对源代码文件的**硬引用**。这些引用不会被编译器检查，**本地测试通过不代表 CI 构建通过**。每次代码变更必须考虑对 CI 的影响。
+
+### 规则 1：CI 引用的文件不可删除或重命名
+
+`release.yaml` 中存在如下类型的硬引用：
+- `sed -i "..." lib/utils/mortis.dart` — 对特定文件的路径引用
+- `cp build/app/outputs/.../app-arm64-v8a-release.apk Kazumi_android_${tag}.apk` — 对构建产物路径的引用
+
+**任何被 CI 引用的文件（路径、文件名）变更时，必须同步更新 workflow**。操作前先 grep：
+```bash
+grep -r "文件名" .github/workflows/
+```
+
+### 规则 2：CI 中的 GitHub Actions 变量引用必须健壮
+
+**不要使用** bash 字符串操作提取 tag 名：
+```yaml
+# 脆弱：只在 tag push 时生效，workflow_dispatch 时会残留 refs/heads/ 前缀
+echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+```
+
+**始终使用** `github.ref_name`：
+```yaml
+# 健壮：任何触发方式下都返回干净的短名
+echo "tag=${{ github.ref_name }}" >> $GITHUB_ENV
+```
+
+| 触发方式 | `GITHUB_REF` | `github.ref_name` |
+|---|---|---|
+| tag push `v1.0.0` | `refs/tags/v1.0.0` | `v1.0.0` |
+| workflow_dispatch (main) | `refs/heads/main` | `main` |
+
+### 规则 3：`flutter test` 不能替代 CI 验证
+
+`release.yaml` 中还有 `flutter test` 和 `flutter analyze` 两个可本地验证的 job。但以下 CI 专用步骤本地无法测试：
+- `sed` 密钥注入（依赖 GitHub Secrets）
+- `flutter build apk/ios/linux/macos/windows`（依赖平台环境）
+- 文件打包 / 重命名（依赖 tag 变量）
+
+**本地测试通过 ≠ CI 构建通过**。提交前必须检查 CI 引用的文件路径是否存在、变量引用是否正确。
+
+---
+
 ## CI Compatibility: `mortis.dart` / `dandan_credentials.dart`
 
 ### Background
