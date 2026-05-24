@@ -506,7 +506,20 @@
           - name: Copy linux build file to root
             run: cp linux_outputs/* .
 
+          - name: Check Android signing capability
+            id: check_android_signing
+            shell: bash
+            run: |
+              if [ -n "$SIGNING_KEY" ]; then
+                echo "enabled=true" >> $GITHUB_OUTPUT
+              else
+                echo "enabled=false" >> $GITHUB_OUTPUT
+              fi
+            env:
+              SIGNING_KEY: ${{ secrets.SIGNING_KEY_BASE64 }}
+
           - name: Sign APK
+            if: steps.check_android_signing.outputs.enabled == 'true'
             id: sign_app
             uses: filippoLeporati93/android-release-signer@v1
             with:
@@ -518,7 +531,12 @@
               BUILD_TOOLS_VERSION: "34.0.0"
 
           - name: Copy Signed android build file
+            if: steps.check_android_signing.outputs.enabled == 'true'
             run: cp ${{steps.sign_app.outputs.signedReleaseFile}} build/signed/Kazumi_android_${{ env.tag }}.apk
+
+          - name: Copy unsigned android build file (no signing key)
+            if: steps.check_android_signing.outputs.enabled == 'false'
+            run: cp build/unsigned/Kazumi_android_${{ env.tag }}.apk build/signed/Kazumi_android_${{ env.tag }}.apk
 
           - name: Create release
             uses: softprops/action-gh-release@v2
