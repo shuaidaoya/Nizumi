@@ -38,8 +38,7 @@ class BangumiCardV extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              AspectRatio(
-                aspectRatio: 0.65,
+              Expanded(
                 child: LayoutBuilder(builder: (context, boxConstraints) {
                   final double maxWidth = boxConstraints.maxWidth;
                   final double maxHeight = boxConstraints.maxHeight;
@@ -87,20 +86,18 @@ class BangumiContent extends StatelessWidget {
             ? 3
             : 2;
 
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(5, 3, 5, 1),
-        child: Text(
-          bangumiItem.nameCn,
-          textAlign: TextAlign.start,
-          style: const TextStyle(
-            fontWeight: FontWeight.w500,
-            letterSpacing: 0.3,
-          ),
-          textScaler: ts.clamp(maxScaleFactor: 1.1),
-          maxLines: maxTextLines,
-          overflow: TextOverflow.ellipsis,
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(5, 3, 5, 1),
+      child: Text(
+        bangumiItem.nameCn,
+        textAlign: TextAlign.start,
+        style: const TextStyle(
+          fontWeight: FontWeight.w500,
+          letterSpacing: 0.3,
         ),
+        textScaler: ts.clamp(maxScaleFactor: 1.1),
+        maxLines: maxTextLines,
+        overflow: TextOverflow.ellipsis,
       ),
     );
   }

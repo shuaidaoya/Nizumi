@@ -4,6 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:kazumi/bean/dialog/dialog_helper.dart';
 import 'package:kazumi/bean/widget/error_widget.dart';
 import 'package:kazumi/bean/widget/custom_dropdown_menu.dart';
+import 'package:kazumi/bean/widget/waterfall_flow.dart';
 import 'package:kazumi/pages/popular/popular_controller.dart';
 import 'package:kazumi/bean/card/bangumi_card.dart';
 import 'package:kazumi/utils/constants.dart';
@@ -123,7 +124,7 @@ class _PopularPageState extends State<PopularPage>
             ),
             SliverPadding(
                 padding: const EdgeInsets.fromLTRB(
-                    StyleString.cardSpace, 0, StyleString.cardSpace, 0),
+                    StyleString.cardSpace, 8, StyleString.cardSpace, 0),
                 sliver: Observer(builder: (_) {
                   if (popularController.isTimeOut) {
                     return SliverToBoxAdapter(
@@ -166,35 +167,40 @@ class _PopularPageState extends State<PopularPage>
   }
 
   Widget contentGrid(bangumiList) {
-    int crossCount = 3;
+    int crossCount = 2;
     if (MediaQuery.sizeOf(context).width > LayoutBreakpoint.compact['width']!) {
-      crossCount = 5;
+      crossCount = 3;
     }
     if (MediaQuery.sizeOf(context).width > LayoutBreakpoint.medium['width']!) {
-      crossCount = 6;
+      crossCount = 4;
     }
-    return SliverPadding(
-      padding: const EdgeInsets.all(8),
-      sliver: SliverGrid(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          // 行间距
-          mainAxisSpacing: StyleString.cardSpace - 2,
-          // 列间距
-          crossAxisSpacing: StyleString.cardSpace,
-          // 列数
-          crossAxisCount: crossCount,
-          mainAxisExtent:
-              MediaQuery.of(context).size.width / crossCount / 0.65 +
-                  MediaQuery.textScalerOf(context).scale(32.0),
-        ),
-        delegate: SliverChildBuilderDelegate(
-          (BuildContext context, int index) {
-            return bangumiList!.isNotEmpty
-                ? BangumiCardV(bangumiItem: bangumiList[index])
-                : null;
-          },
-          childCount: bangumiList!.isNotEmpty ? bangumiList!.length : 10,
-        ),
+    final double screenWidth = MediaQuery.of(context).size.width;
+    final double textScale = MediaQuery.textScalerOf(context).scale(1.0);
+    final double childWidth =
+        (screenWidth - StyleString.cardSpace * 2 - (crossCount - 1) * StyleString.cardSpace) /
+            crossCount;
+    final double baseImageHeight = childWidth / 0.65;
+    final double textHeight = 32.0 * textScale;
+
+    double itemExtent(int index) {
+      final int pattern = index % 3;
+      final double variation =
+          pattern == 0 ? 1.0 : (pattern == 1 ? 1.08 : 0.92);
+      return baseImageHeight * variation + textHeight;
+    }
+
+    return SliverWaterfallFlow(
+      crossAxisCount: crossCount,
+      mainAxisSpacing: StyleString.cardSpace - 2,
+      crossAxisSpacing: StyleString.cardSpace,
+      itemExtent: itemExtent,
+      delegate: SliverChildBuilderDelegate(
+        (BuildContext context, int index) {
+          return bangumiList!.isNotEmpty
+              ? BangumiCardV(bangumiItem: bangumiList[index])
+              : null;
+        },
+        childCount: bangumiList!.isNotEmpty ? bangumiList!.length : 10,
       ),
     );
   }
