@@ -165,6 +165,18 @@ A: 本项目编译需要良好的网络环境, 除了由 Google 托管的 Flutte
 
 我们不收集任何用户数据, 不使用任何遥测组件。
 
+## 关于代码中的 "Kazumi" 引用
+
+本项目由原项目 [Predidit/Kazumi](https://github.com/Predidit/Kazumi) 派生而来。代码中仍保留部分 "Kazumi" 字样，均属刻意保留而非遗漏：
+
+| 保留项 | 说明 |
+|--------|------|
+| `package:kazumi/*` (Dart 包名) | 修改会导致全部 import 语句报错，功能上等价 |
+| `com.predidit.kazumi/*` (MethodChannel 名) | Flutter 与原生代码的 IPC 通道标识符，同时存在于 Dart 端、Android Kotlin、iOS/macOS Swift、Windows C++、Linux C++ 中，必须保持一致 |
+| `KazumiDialog`、`KazumiLogger` 等类名 | 内部标识符，不影响用户体验 |
+| `KazumiRules` (规则仓库) | 外部资源 URL，规则仓库独立维护 |
+| F-Droid / Flathub / AUR 包名 | 第三方分发渠道标识，需额外申请才能变更 |
+
 ## 代码签名策略 (Code signing policy)
 提交者: [Contributors](https://github.com/shuaidaoya/Nizumi/graphs/contributors)
 审阅者: [Owner](https://github.com/shuaidaoya)
