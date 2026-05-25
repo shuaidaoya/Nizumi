@@ -1,6 +1,6 @@
 class ApiEndpoints {
   /// 当前版本
-  static const String version = '2.1.2';
+  static const String version = '1.0.0';
 
   /// 规则API级别
   static const int apiLevel = 7;
@@ -9,7 +9,7 @@ class ApiEndpoints {
   static const String projectUrl = "https://kazumi.app/";
 
   /// Github 项目主页
-  static const String sourceUrl = "https://github.com/Predidit/Kazumi";
+  static const String sourceUrl = "https://github.com/shuaidaoya/xiangsushengdian";
 
   /// 图标作者
   static const String iconUrl = "https://www.pixiv.net/users/66219277";
@@ -20,7 +20,7 @@ class ApiEndpoints {
 
   /// 在线升级
   static const String latestApp =
-      'https://api.github.com/repos/Predidit/Kazumi/releases/latest';
+      'https://api.github.com/repos/shuaidaoya/xiangsushengdian/releases/latest';
 
   /// Github镜像
   static const String gitMirror = 'https://ghfast.top/';
