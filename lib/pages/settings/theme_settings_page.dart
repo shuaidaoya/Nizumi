@@ -288,39 +288,46 @@ class _ThemeSettingsPageState extends State<ThemeSettingsPage> {
                             (BuildContext context, StateSetter setState) {
                           final List<Map<String, dynamic>> colorThemes =
                               colorThemeTypes;
-                          return Wrap(
-                            alignment: WrapAlignment.center,
-                            spacing: 8,
-                            runSpacing: isDesktop() ? 8 : 0,
-                            children: [
-                              ...colorThemes.map(
-                                (e) {
-                                  final index = colorThemes.indexOf(e);
-                                  return GestureDetector(
-                                    onTap: () {
-                                      index == 0
-                                          ? resetTheme()
-                                          : setTheme(e['color']);
-                                      KazumiDialog.dismiss();
-                                    },
-                                    child: Column(
-                                      children: [
-                                        PaletteCard(
-                                          color: e['color'],
-                                          selected: (e['color']
-                                                      .value
-                                                      .toRadixString(16) ==
-                                                  defaultThemeColor ||
-                                              (defaultThemeColor == 'default' &&
-                                                  index == 0)),
+                          return ConstrainedBox(
+                            constraints: const BoxConstraints(
+                                maxHeight: 340, maxWidth: 420),
+                            child: SingleChildScrollView(
+                              child: Wrap(
+                                alignment: WrapAlignment.center,
+                                spacing: 8,
+                                runSpacing: 8,
+                                children: [
+                                  ...colorThemes.map(
+                                    (e) {
+                                      final index = colorThemes.indexOf(e);
+                                      return GestureDetector(
+                                        onTap: () {
+                                          index == 0
+                                              ? resetTheme()
+                                              : setTheme(e['color']);
+                                          KazumiDialog.dismiss();
+                                        },
+                                        child: Column(
+                                          children: [
+                                            PaletteCard(
+                                              color: e['color'],
+                                              selected: (e['color']
+                                                          .value
+                                                          .toRadixString(16) ==
+                                                      defaultThemeColor ||
+                                                  (defaultThemeColor ==
+                                                          'default' &&
+                                                      index == 0)),
+                                            ),
+                                            Text(e['label']),
+                                          ],
                                         ),
-                                        Text(e['label']),
-                                      ],
-                                    ),
-                                  );
-                                },
-                              )
-                            ],
+                                      );
+                                    },
+                                  )
+                                ],
+                              ),
+                            ),
                           );
                         }),
                       );
