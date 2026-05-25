@@ -210,7 +210,7 @@
             with:
               name: windows_msix_outputs
               path: |
-                build/windows/x64/runner/Release/kazumi.msix
+                build/windows/x64/runner/Release/nizumi.msix
            
           # Sign MSIX
           - name: Prepare msix signing directory

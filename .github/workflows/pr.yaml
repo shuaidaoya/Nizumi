@@ -180,7 +180,7 @@
           #   with:
           #     name: windows_msix_outputs
           #     path: |
-          #       build/windows/x64/runner/Release/kazumi.msix
+          #       build/windows/x64/runner/Release/nizumi.msix
           
           # - run: New-Item -Path "build/windows/msix_signed_output" -ItemType Directory
           # - name: sign windows msix

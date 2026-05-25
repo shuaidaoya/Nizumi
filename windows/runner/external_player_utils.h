@@ -1,5 +1,5 @@
 // This file is a part of Nizumi
-// (https://github.com/Predidit/Kazumi).
+// (https://github.com/shuaidaoya/Nizumi).
 //
 // Copyright © 2024 Predidit
 // All rights reserved.
