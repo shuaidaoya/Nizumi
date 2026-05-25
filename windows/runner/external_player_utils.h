@@ -1,4 +1,4 @@
-// This file is a part of Kazumi
+// This file is a part of Nizumi
 // (https://github.com/Predidit/Kazumi).
 //
 // Copyright © 2024 Predidit

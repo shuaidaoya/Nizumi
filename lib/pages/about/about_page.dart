@@ -224,7 +224,7 @@ class _AboutPageState extends State<AboutPage> {
                   },
                   title: Text('Telegram',
                       style: TextStyle(fontFamily: fontFamily)),
-                  description: Text('Kazumi 官方 Telegram 群组',
+                  description: Text('Nizumi 官方 Telegram 群组',
                       style: TextStyle(fontFamily: fontFamily)),
                   value: Text('点击加入', style: TextStyle(fontFamily: fontFamily)),
                 ),
