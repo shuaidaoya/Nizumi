@@ -6,6 +6,7 @@ final List<Map<String, dynamic>> colorThemeTypes = [
   {'color': Colors.blue, 'label': '蓝色'},
   {'color': Colors.indigo, 'label': '靛蓝色'},
   {'color': const Color(0xff6750a4), 'label': '紫罗兰色'},
+  {'color': const Color(0xff5645d4), 'label': 'Notion'},
   {'color': Colors.pink, 'label': '粉红色'},
   {'color': Colors.yellow, 'label': '黄色'},
   {'color': Colors.orange, 'label': '橙色'},
