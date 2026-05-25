@@ -58,9 +58,9 @@
 
 ## 下载
 
-通过本页面 [releases](https://github.com/Predidit/Kazumi/releases) 选项卡下载：
+通过本页面 [releases](https://github.com/shuaidaoya/Nizumi/releases) 选项卡下载：
 
-<a href="https://github.com/Predidit/Kazumi/releases">
+<a href="https://github.com/shuaidaoya/Nizumi/releases">
   <img src="static/svg/get_it_on_github.svg" alt="Get it on Github" width="200"/>
 </a>
 
@@ -166,8 +166,8 @@ A: 本项目编译需要良好的网络环境, 除了由 Google 托管的 Flutte
 我们不收集任何用户数据, 不使用任何遥测组件。
 
 ## 代码签名策略 (Code signing policy)
-提交者: [Contributors](https://github.com/Predidit/Kazumi/graphs/contributors)
-审阅者: [Owner](https://github.com/Predidit)
+提交者: [Contributors](https://github.com/shuaidaoya/Nizumi/graphs/contributors)
+审阅者: [Owner](https://github.com/shuaidaoya)
 
 ## 赞助 (Sponsors)
 | ![signpath](https://signpath.org/assets/favicon-50x50.png) | Free code signing on Windows provided by [SignPath.io](https://about.signpath.io/), certficate by [SignPath Foundation](https://signpath.org/) |

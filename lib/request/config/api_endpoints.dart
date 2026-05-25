@@ -9,7 +9,7 @@ class ApiEndpoints {
   static const String projectUrl = "https://kazumi.app/";
 
   /// Github 项目主页
-  static const String sourceUrl = "https://github.com/shuaidaoya/xiangsushengdian";
+  static const String sourceUrl = "https://github.com/shuaidaoya/Nizumi";
 
   /// 图标作者
   static const String iconUrl = "https://www.pixiv.net/users/66219277";
@@ -20,7 +20,7 @@ class ApiEndpoints {
 
   /// 在线升级
   static const String latestApp =
-      'https://api.github.com/repos/shuaidaoya/xiangsushengdian/releases/latest';
+      'https://api.github.com/repos/shuaidaoya/Nizumi/releases/latest';
 
   /// Github镜像
   static const String gitMirror = 'https://ghfast.top/';

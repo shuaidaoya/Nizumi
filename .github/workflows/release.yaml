@@ -322,7 +322,7 @@
               Essential: no
               Installed-Size: 34648
               Description: Watch Animes online with danmaku support.
-              Homepage: https://github.com/Predidit/Kazumi
+              Homepage: https://github.com/shuaidaoya/Nizumi
               Depends: libayatana-appindicator3-1,
                        gir1.2-ayatanaappindicator3-0.1,
                        libwebkit2gtk-4.1-0

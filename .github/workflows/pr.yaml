@@ -130,14 +130,14 @@
             run: flutter build apk --split-per-abi
             shell: bash
           - name: Package android build output
-            run: cp build/app/outputs/flutter-apk/app-arm64-v8a-release.apk Kazumi_android_canary.apk
+            run: cp build/app/outputs/flutter-apk/app-arm64-v8a-release.apk Nizumi_android_canary.apk
             shell: bash
 
           - name: Upload android outputs
             uses: actions/upload-artifact@v4
             with:
               name: android_outputs
-              path: Kazumi_android_*.apk
+              path: Nizumi_android_*.apk
 
       flutter-build-windows:
         needs: [flutter-test, flutter-analyze]
@@ -164,14 +164,14 @@
               java-version: '18'
           - run: flutter pub get
           - run: flutter build windows  
-          - run: Compress-Archive build/windows/x64/runner/Release/* Kazumi_windows_canary.zip
+          - run: Compress-Archive build/windows/x64/runner/Release/* Nizumi_windows_canary.zip
           - name: Upload windows outputs
             id: unsigned-windows-packet-artifacts
             uses: actions/upload-artifact@v4
             with:
               name: windows_outputs
               path: |
-                Kazumi_windows_*.zip
+                Nizumi_windows_*.zip
           # - name: Build unsigned msix
           #   run: dart run msix:create
           # - name: Upload windows msix ouputs
@@ -189,7 +189,7 @@
           #   with:
           #     api-token: '${{ secrets.SIGNPATH_API_TOKEN }}'
           #     organization-id: 'fa047255-4772-4be1-b14f-5cfa62635877'
-          #     project-slug: 'Kazumi'
+          #     project-slug: 'Nizumi'
           #     signing-policy-slug: 'test-signing'
           #     artifact-configuration-slug: 'MSIX'
           #     github-artifact-id: '${{ steps.unsigned-windows-msix-artifacts.outputs.artifact-id }}'
@@ -229,12 +229,12 @@
               mkdir Payload
               cp -R build/ios/iphoneos/Runner.app Payload/Runner.app
               find Payload/Runner.app/Frameworks -type d -name "*.framework" -exec codesign --force --sign - --preserve-metadata=identifier,entitlements {} \;
-              zip -q -r Kazumi_ios_canary_no_sign.ipa Payload
+              zip -q -r Nizumi_ios_canary_no_sign.ipa Payload
           - name: Upload iOS build
             uses: actions/upload-artifact@v4
             with:
               name: ios_outputs
-              path: Kazumi_ios_*.ipa
+              path: Nizumi_ios_*.ipa
 
       flutter-build-macos:
         needs: [flutter-test, flutter-analyze]
@@ -256,15 +256,15 @@
           - name: Create DMG
             run: |
               npm install --global create-dmg
-              create-dmg build/macos/Build/Products/Release/Kazumi.app
+              create-dmg build/macos/Build/Products/Release/Nizumi.app
             continue-on-error: true
           - name: Rename DMG
-            run: mv Kazumi*.dmg Kazumi_macos_canary.dmg
+            run: mv Nizumi*.dmg Nizumi_macos_canary.dmg
           - name: Upload MacOS build
             uses: actions/upload-artifact@v4
             with:
               name: macos_outputs
-              path: Kazumi_macos_*.dmg
+              path: Nizumi_macos_*.dmg
 
       flutter-build-linux:
         needs: [flutter-test, flutter-analyze]
@@ -316,22 +316,22 @@
           - name: Package linux build output
             run: |
               # Tarball package
-              tar -zcvf Kazumi_linux_canary.tar.gz -C build/linux/x64/release/bundle .
+              tar -zcvf Nizumi_linux_canary.tar.gz -C build/linux/x64/release/bundle .
 
               # Debian package
-              mkdir Kazumi_linux_canary_amd64
-              cd Kazumi_linux_canary_amd64
-              mkdir -p opt/Kazumi
+              mkdir Nizumi_linux_canary_amd64
+              cd Nizumi_linux_canary_amd64
+              mkdir -p opt/Nizumi
               mkdir -p usr/share/applications
               mkdir -p usr/share/icons/hicolor/512x512/apps
-              cp -r ../build/linux/x64/release/bundle/* opt/Kazumi
+              cp -r ../build/linux/x64/release/bundle/* opt/Nizumi
               cp -r ../assets/linux/DEBIAN .
               chmod 0755 DEBIAN/postinst
               chmod 0755 DEBIAN/postrm
 
               cat>DEBIAN/control<<EOF
               Maintainer: madoka773 <valigarmanda55@gmail.com>
-              Package: Kazumi
+              Package: Nizumi
               Version: 0.0.1
               Section: x11
               Priority: optional
@@ -339,17 +339,17 @@
               Essential: no
               Installed-Size: 34648
               Description: Watch Animes online with danmaku support.
-              Homepage: https://github.com/Predidit/Kazumi
+              Homepage: https://github.com/shuaidaoya/Nizumi
               Depends: libayatana-appindicator3-1,
                        gir1.2-ayatanaappindicator3-0.1,
                        libwebkit2gtk-4.1-0
               EOF
 
-              cp ../assets/linux/io.github.Predidit.Kazumi.desktop usr/share/applications
-              cp ../assets/images/logo/logo_linux.png usr/share/icons/hicolor/512x512/apps/io.github.Predidit.Kazumi.png
+              cp ../assets/linux/io.github.Predidit.Nizumi.desktop usr/share/applications
+              cp ../assets/images/logo/logo_linux.png usr/share/icons/hicolor/512x512/apps/io.github.Predidit.Nizumi.png
 
               cd ..
-              dpkg-deb --build --root-owner-group Kazumi_linux_canary_amd64
+              dpkg-deb --build --root-owner-group Nizumi_linux_canary_amd64
             shell: bash
 
           - name: Upload linux outputs
@@ -357,5 +357,5 @@
             with:
               name: linux_outputs
               path: |
-                Kazumi_linux_*.tar.gz
-                Kazumi_linux_*.deb
+                Nizumi_linux_*.tar.gz
+                Nizumi_linux_*.deb
