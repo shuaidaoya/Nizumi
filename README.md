@@ -23,14 +23,14 @@
 
 <table>
   <tr>
-    <td><img alt="" src="static/screenshot/img_1.png"></td>
-    <td><img alt="" src="static/screenshot/img_2.png"></td>
-    <td><img alt="" src="static/screenshot/img_3.png"></td>
+    <td><img alt="" src="static/screenshot/img_1.jpg"></td>
+    <td><img alt="" src="static/screenshot/img_2.jpg"></td>
+    <td><img alt="" src="static/screenshot/img_3.jpg"></td>
   <tr>
   <tr>
-    <td><img alt="" src="static/screenshot/img_4.png"></td>
-    <td><img alt="" src="static/screenshot/img_5.png"></td>
-    <td><img alt="" src="static/screenshot/img_6.png"></td>
+    <td><img alt="" src="static/screenshot/img_4.jpg"></td>
+    <td><img alt="" src="static/screenshot/img_5.jpg"></td>
+    <td><img alt="" src="static/screenshot/img_6.jpg"></td>
   <tr>
 </table>
 
