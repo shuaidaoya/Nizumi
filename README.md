@@ -2,7 +2,13 @@
 
 [![Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=flat&logo=telegram&logoColor=white)](https://t.me/kazumi_app)
 
-使用 Flutter 开发的基于自定义规则的番剧采集与在线观看程序。使用最多五行基于 `Xpath` 语法的选择器构建自己的规则。支持规则导入与规则分享。支持基于 `Anime4K` 的实时超分辨率。绝赞开发中 (～￣▽￣)～
+基于 [Predidit/Kazumi](https://github.com/Predidit/Kazumi) 二次开发的番剧采集与在线观看程序，使用 Flutter 框架构建。
+
+**与原项目相比新增：**
+- 新增 3 种预设配色方案（Vercel、Notion、Airtable），配色对话框支持移动端滚动
+- 更新接口、构建配置及品牌标识均指向本仓库而非原项目
+
+使用最多五行基于 `Xpath` 语法的选择器构建自己的规则。支持规则导入与规则分享。支持基于 `Anime4K` 的实时超分辨率。绝赞开发中 (～￣▽￣)～
 
 ## 支持平台
 
