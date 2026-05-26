@@ -92,8 +92,9 @@
               sed -i "s/rABUaBLqdz7aCSi3fe88ZDj2gwga9Vax/${{ secrets.DANDANAPI_KEY }}/g" lib/utils/mortis.dart
           - name: Inject version from tag
             run: |
-              sed -i "s/static const String version = '.*';/static const String version = '${{ github.ref_name }}';/" lib/request/config/api_endpoints.dart
-              sed -i "s/^version: .*/version: ${{ github.ref_name }}+1/" pubspec.yaml
+              VERSION=$(echo "${{ github.ref_name }}" | sed 's/^v//')
+              sed -i "s/static const String version = '.*';/static const String version = '${VERSION}';/" lib/request/config/api_endpoints.dart
+              sed -i "s/^version: .*/version: ${VERSION}+1/" pubspec.yaml
             shell: bash
           - name: Build Flutter for Android
             run: flutter build apk --split-per-abi
@@ -145,8 +146,9 @@
               (Get-Content -Path 'lib/utils/mortis.dart') -replace "rABUaBLqdz7aCSi3fe88ZDj2gwga9Vax", "$env:DANDANAPI_KEY" | Set-Content -Path 'lib/utils/mortis.dart'
           - name: Inject version from tag
             run: |
-              (Get-Content -Path 'lib/request/config/api_endpoints.dart') -replace "static const String version = '.*';", "static const String version = '${{ github.ref_name }}';" | Set-Content -Path 'lib/request/config/api_endpoints.dart'
-              (Get-Content -Path 'pubspec.yaml') -replace "^version: .*", "version: ${{ github.ref_name }}+1" | Set-Content -Path 'pubspec.yaml'
+              $VERSION = "${{ github.ref_name }}" -replace '^v', ''
+              (Get-Content -Path 'lib/request/config/api_endpoints.dart') -replace "static const String version = '.*';", "static const String version = '$VERSION';" | Set-Content -Path 'lib/request/config/api_endpoints.dart'
+              (Get-Content -Path 'pubspec.yaml') -replace "^version: .*", "version: ${VERSION}+1" | Set-Content -Path 'pubspec.yaml'
           - run: flutter build windows
           - run: Compress-Archive build/windows/x64/runner/Release/* Nizumi_windows_${env:tag}.zip
           - name: Upload windows unsigned zip outputs
@@ -292,8 +294,9 @@
               sed -i "s/rABUaBLqdz7aCSi3fe88ZDj2gwga9Vax/${{ secrets.DANDANAPI_KEY }}/g" lib/utils/mortis.dart
           - name: Inject version from tag
             run: |
-              sed -i "s/static const String version = '.*';/static const String version = '${{ github.ref_name }}';/" lib/request/config/api_endpoints.dart
-              sed -i "s/^version: .*/version: ${{ github.ref_name }}+1/" pubspec.yaml
+              VERSION=$(echo "${{ github.ref_name }}" | sed 's/^v//')
+              sed -i "s/static const String version = '.*';/static const String version = '${VERSION}';/" lib/request/config/api_endpoints.dart
+              sed -i "s/^version: .*/version: ${VERSION}+1/" pubspec.yaml
             shell: bash
           - name: Build Flutter for Linux
             run: flutter build linux
@@ -382,8 +385,9 @@
               sed -i '' "s/rABUaBLqdz7aCSi3fe88ZDj2gwga9Vax/${{ secrets.DANDANAPI_KEY }}/g" lib/utils/mortis.dart
           - name: Inject version from tag
             run: |
-              sed -i '' "s/static const String version = '.*';/static const String version = '${{ github.ref_name }}';/" lib/request/config/api_endpoints.dart
-              sed -i '' "s/^version: .*/version: ${{ github.ref_name }}+1/" pubspec.yaml
+              VERSION=$(echo "${{ github.ref_name }}" | sed 's/^v//')
+              sed -i '' "s/static const String version = '.*';/static const String version = '${VERSION}';/" lib/request/config/api_endpoints.dart
+              sed -i '' "s/^version: .*/version: ${VERSION}+1/" pubspec.yaml
           - name: Build IPA
             run: |
               flutter build ios --release --no-codesign
@@ -424,8 +428,9 @@
               sed -i '' "s/rABUaBLqdz7aCSi3fe88ZDj2gwga9Vax/${{ secrets.DANDANAPI_KEY }}/g" lib/utils/mortis.dart
           - name: Inject version from tag
             run: |
-              sed -i '' "s/static const String version = '.*';/static const String version = '${{ github.ref_name }}';/" lib/request/config/api_endpoints.dart
-              sed -i '' "s/^version: .*/version: ${{ github.ref_name }}+1/" pubspec.yaml
+              VERSION=$(echo "${{ github.ref_name }}" | sed 's/^v//')
+              sed -i '' "s/static const String version = '.*';/static const String version = '${VERSION}';/" lib/request/config/api_endpoints.dart
+              sed -i '' "s/^version: .*/version: ${VERSION}+1/" pubspec.yaml
           - run: flutter build macos --release
           - name: Create DMG
             run: |
